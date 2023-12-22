@@ -3,14 +3,14 @@ import "./App.css";
 import React, { useState, useEffect, useRef } from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import { useTodoLayerValue } from "./context/TodoContext";
+import { useTaskLayerValue } from "./context/TaskContext";
 import TodoList from "./components/TodoList";
 import { Button, Card, Col, Form, Row, ToastContainer } from "react-bootstrap";
 import { Toast } from "react-bootstrap";
 import { HiOutlinePlus } from "react-icons/hi";
 
 const App = () => {
-  const [{ todos }, dispatch] = useTodoLayerValue();
+  const [{ tasks }, dispatch] = useTaskLayerValue();
   const [showToast, setShowToast] = useState(false);
   const [content, setContent] = useState("");
 
@@ -30,15 +30,15 @@ const App = () => {
       return;
     }
 
-    const newTodo = {
+    const newTask = {
       id: Math.floor(Math.random() * 94875893456),
       content,
       isCompleted: false,
     };
 
     dispatch({
-      type: "ADD_TODO",
-      payload: newTodo,
+      type: "ADD_TASK",
+      payload: newTask,
     });
 
     setContent("");
@@ -108,7 +108,7 @@ const App = () => {
                 </Form>
               </div>
 
-              <TodoList todos={todos} />
+              <TodoList tasks={tasks} />
             </Card.Body>
           </Card>
         </Col>

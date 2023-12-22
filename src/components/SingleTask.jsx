@@ -1,31 +1,31 @@
 import React, { useState } from "react";
-import { useTodoLayerValue } from "../context/TodoContext";
+import { useTaskLayerValue } from "../context/TaskContext";
 import { Col, Row } from "react-bootstrap";
 import { BiEdit } from "react-icons/bi";
 import { HiOutlineTrash, HiCheck } from "react-icons/hi";
 
-const SingleTodo = ({ todo }) => {
-  const [, dispatch] = useTodoLayerValue();
+const SingleTask = ({ task }) => {
+  const [, dispatch] = useTaskLayerValue();
   const [editable, setEditable] = useState(false);
-  const [content, setContent] = useState(todo.content);
+  const [content, setContent] = useState(task.content);
 
-  const removeTodo = (todoId) => {
+  const removeTodo = (taskId) => {
     dispatch({
-      type: "REMOVE_TODO",
-      payload: todoId,
+      type: "REMOVE_TASK",
+      payload: taskId,
     });
   };
-  const completeTodo = (todoId) => {
+  const completeTodo = (taskId) => {
     dispatch({
-      type: "COMPLETE_TODO",
-      payload: todoId,
+      type: "COMPLETE_TASK",
+      payload: taskId,
     });
   };
-  const updateTodo = ({ todoId, newValue }) => {
+  const updateTodo = ({ taskId, newValue }) => {
     dispatch({
-      type: "UPDATE_TODO",
+      type: "UPDATE_TASK",
       payload: {
-        todoId,
+        taskId,
         newValue,
       },
     });
@@ -35,10 +35,10 @@ const SingleTodo = ({ todo }) => {
   return (
     <li className="task-list-item mt-2 px-1">
       <Row className="w-100 justify-content-between m-0">
-        <Col className="todo p-1" xs={12}>
+        <Col className="task p-1" xs={12}>
           <input
             className="checkbox"
-            checked={todo.isCompleted ? "checked" : ""}
+            checked={task.isCompleted ? "checked" : ""}
             type="checkbox"
           />
           {editable ? (
@@ -49,7 +49,7 @@ const SingleTodo = ({ todo }) => {
               onKeyUp={(e) =>
                 e.key === "Enter"
                   ? updateTodo({
-                      todoId: todo.id,
+                      taskId: task.id,
                       newValue: content,
                     })
                   : ""
@@ -58,10 +58,10 @@ const SingleTodo = ({ todo }) => {
             />
           ) : (
             <span
-              onClick={() => (editable ? "" : completeTodo(todo.id))}
-              className={todo.isCompleted ? "task-name complated" : "task-name"}
+              onClick={() => (editable ? "" : completeTodo(task.id))}
+              className={task.isCompleted ? "task-name complated" : "task-name"}
             >
-              {todo.content}
+              {task.content}
             </span>
           )}
           <div className="buttons">
@@ -72,7 +72,7 @@ const SingleTodo = ({ todo }) => {
                     className="check-btn"
                     onClick={() => {
                       updateTodo({
-                        todoId: todo.id,
+                        taskId: task.id,
                         newValue: content,
                       });
                     }}
@@ -81,12 +81,14 @@ const SingleTodo = ({ todo }) => {
               </span>
             ) : (
               <>
-                <span className="edit-btn" onClick={() => setEditable(true)}>
-                  {<BiEdit />}
-                </span>
+                {!task.isCompleted ? (
+                  <span className="edit-btn" onClick={() => setEditable(true)}>
+                    {<BiEdit />}
+                  </span>
+                ) : null}
                 <span
                   className="delete-btn"
-                  onClick={() => removeTodo(todo.id)}
+                  onClick={() => removeTodo(task.id)}
                 >
                   {<HiOutlineTrash />}
                 </span>
@@ -99,4 +101,4 @@ const SingleTodo = ({ todo }) => {
   );
 };
 
-export default SingleTodo;
+export default SingleTask;

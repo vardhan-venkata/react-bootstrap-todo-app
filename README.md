@@ -5,7 +5,8 @@
 ### Description <hr/>
 
 - This is a react todo-list developed using bootstrap components, react icons, and using context.
-- In this even a toast message will be shown when user tries to add empty to-do
+- In this even a toast message will be shown when user tries to add empty to-do.
+- We cannot edit the completed to-do.This can be achieved by conditional rendering.
 
 <img src="./DemoImage1.png">
 <img src="./DemoImage2.png">

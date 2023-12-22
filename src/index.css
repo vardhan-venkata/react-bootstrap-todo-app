@@ -67,7 +67,7 @@ input[type="checkbox"]{
 }
 
 
-.todo {
+.task {
   display: grid;
   gap: 3px;
   grid-auto-rows: minmax(10px, auto);

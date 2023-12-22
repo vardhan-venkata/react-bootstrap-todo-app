@@ -1,12 +1,12 @@
 import React from "react";
-import SingleTodo from "./SingleTodo";
+import SingleTask from "./SingleTask";
 
-const TodoList = ({ todos }) => {
+const TodoList = ({ tasks }) => {
   return (
     <>
       <style jsx="true">{``}</style>
       <ul className="task-list">
-        {todos && todos.map((todo) => <SingleTodo key={todo.id} todo={todo} />)}
+        {tasks && tasks.map((task) => <SingleTask key={task.id} task={task} />)}
       </ul>
     </>
   );
